@@ -10,6 +10,12 @@ import java.util.Collection;
 /**
  * Created by Sergey on 08.03.16.
  */
+
+/**
+ * Перечесление, представляющее удобный доступ к различным способам корреляции.
+ * Для вычисления корреляции в задаче используется максимальная корреляция из всех методов, так как в задании
+ * сказано подсчитать максимальную корреляцию
+ */
 public enum Correlation {
     KENDALL {
         @Override
@@ -44,6 +50,9 @@ public enum Correlation {
     }
 
     public static double getMaxAbsCorrelation(Collection<Double> first, Collection<Double> second) {
-        return Math.abs(getMaxCorrelation(first, second));
+        double a = Math.abs(KENDALL.getCorrelation(first, second));
+        double b = Math.abs(SPEARMAN.getCorrelation(first, second));
+        double c = Math.abs(PEARSON.getCorrelation(first, second));
+        return Math.max(a, Math.max(b, c));
     }
 }
